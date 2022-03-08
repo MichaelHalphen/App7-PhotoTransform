@@ -75,6 +75,55 @@
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
  }
 
+function drawImage(imageObj) { /*this is the second canvas function area*/
+        var canvas = document.getElementById('myCanvas');
+        var context = canvas.getContext('2d');
+        context.font = '20pt Calibri';
+        context.fillStyle = "black";
+        context.fillText("Blue only", 10, 20);
+        var imageX = 69;
+        var imageY = 50;
+        var imageWidth = imageObj.width;
+        var imageHeight = imageObj.height;
+
+        context.drawImage(imageObj, imageX, imageY);
+
+        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
+        var data = imageData.data;
+
+        // iterate over all pixels
+        for(var i = 0, n = data.length; i < n; i += 4) {
+          var red = data[i];
+          var green = data[i + 1];
+          var blue = data[i + 2];
+          var alpha = data[i + 3];
+        }
+
+        // pick out pixel data from x, y coordinate
+        var x = 20;
+        var y = 20;
+        var red = data[((imageWidth * y) + x) * 4];
+        var green = data[((imageWidth * y) + x) * 4 + 1];
+        var blue = data[((imageWidth * y) + x) * 4 + 2];
+        var alpha = data[((imageWidth * y) + x) * 4 + 3];
+        
+        // iterate over all pixels based on x and y coordinates
+        for(var y = 0; y < imageHeight; y++) {
+          // loop through each column
+          for(var x = 0; x < imageWidth; x++) {
+            var red = data[((imageWidth * y) + x) * 4];
+            var green = data[((imageWidth * y) + x) * 4 + 1];
+            var blue = data[((imageWidth * y) + x) * 4 + 2];
+            var alpha = data[((imageWidth * y) + x) * 4 + 3];
+          }
+        }
+      }
+      var imageObj = new Image();
+      imageObj.onload = function() {
+        drawImage(this);
+      };
+      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg';
+
 /* window.onload necessary to keep javascripts from running before the app gets a chance to load entirely. */
  window.onload = function() {
   var fileInput = document.getElementById('fileInput');
@@ -134,15 +183,28 @@
       </div>
       <div id="messageDisplayArea"></div>
       
+      <canvas id="a" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas> <!-- this is the second canvas-->
+      
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
-        var canvas = document.getElementById('myCanvas');
+      
+      
+      <script> /* This script here initiates the cavas and puts the text on the canvas "myCanvas" */
+      
+        var canvas = document.getElementById('a');
         var context = canvas.getContext("2d");
         context.font = '20pt Calibri';
         context.fillStyle = "black";
         context.fillText("Original image will go here", 10, 20);
       </script>
 
+        <script>
+      
+    </script>
+  <script>"use strict";var wprRemoveCPCSS=function wprRemoveCPCSS(){var elem;document.querySelector('link[data-rocket-async="style"][rel="preload"]')?setTimeout(wprRemoveCPCSS,200):(elem=document.getElementById("rocket-critical-css"))&&"remove"in elem&&elem.remove()};window.addEventListener?window.addEventListener("load",wprRemoveCPCSS):window.attachEvent&&window.attachEvent("onload",wprRemoveCPCSS);</script><script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.pus
+            </script>
+  
     </div><!-- /content -->
     <div data-role="footer" data-position="fixed">
       <p>DIY Diagnostics</p>
