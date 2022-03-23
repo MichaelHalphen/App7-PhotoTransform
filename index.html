@@ -14,7 +14,7 @@
  
   Authors in chronological order of contribution:
   Author 1: Timothy E. Riedel
-  Author 2: ?????????
+  Author 2: Michael Halphen
   
   References:
   http://docs.webplatform.org/wiki/concepts/programming/drawing_images_onto_canvas#Loading_the_image_programmatically
@@ -75,7 +75,7 @@
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
  }
 
-function drawImage(imageObj) { /*this is the second canvas function area*/
+function drawImage(imageObj) { /*this is the second canvas function area and its contents will apear in the second canvas*/
         var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext('2d');
         context.font = '20pt Calibri';
@@ -91,7 +91,7 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
         var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
         var data = imageData.data;
 
-        // iterate over all pixels
+        /* iterate over all pixels*/
         for(var i = 0, n = data.length; i < n; i += 4) {
           var red = data[i];
           var green = data[i + 1];
@@ -99,7 +99,7 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
           var alpha = data[i + 3];
         }
 
-        // pick out pixel data from x, y coordinate
+        /* pick out pixel data from x, y coordinate*/
         var x = 20;
         var y = 20;
         var red = data[((imageWidth * y) + x) * 4];
@@ -107,9 +107,9 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
         var blue = data[((imageWidth * y) + x) * 4 + 2];
         var alpha = data[((imageWidth * y) + x) * 4 + 3];
         
-        // iterate over all pixels based on x and y coordinates
+        /* iterate over all pixels based on x and y coordinates*/
         for(var y = 0; y < imageHeight; y++) {
-          // loop through each column
+          /* loop through each column*/
           for(var x = 0; x < imageWidth; x++) {
             var red = data[((imageWidth * y) + x) * 4];
             var green = data[((imageWidth * y) + x) * 4 + 1];
@@ -188,7 +188,7 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
       
       
-      <script> /* This script here initiates the cavas and puts the text on the canvas "myCanvas" */
+      <script> /* This script here initiates the cavas and puts the text on the canvas "Original image will go here" */
       
         var canvas = document.getElementById('a');
         var context = canvas.getContext("2d");
