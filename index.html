@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <!-- The following code has been developed by students and/or researchers of the Freshman Research Initiative, DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only.  Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.
  
   THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
@@ -13,7 +14,7 @@
  
   Authors in chronological order of contribution:
   Author 1: Timothy E. Riedel
-  Author 2: Michael
+  Author 2: ?????????
   
   References:
   http://docs.webplatform.org/wiki/concepts/programming/drawing_images_onto_canvas#Loading_the_image_programmatically
@@ -28,6 +29,7 @@
   Known Issues:
   blah, blah, blah, blah
 -->
+
  <head>
   <meta charset="utf-8">
   <title>Photo Transform</title>
@@ -36,9 +38,11 @@
   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
   <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
   <script src="https://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+
  <script>
   var docMod = document.lastModified; // gets last modified date and time of the index.html file
   console.log("This file last modified  " + docMod); // displays last modified date and time in the javascipt browser console 
+
 /* detectVerticalSquash & drawImageIOSFix = are functions that are critical due to a flaw in the iPhone camera software that squishes any photos displayed on an HTML5 canvas element. https://github.com/stomita/ios-imagefile-megapixel
 */
  function detectVerticalSquash(img) {
@@ -65,54 +69,12 @@
   var ratio = (py / ih);
   return (ratio===0)?1:ratio;
  }
+
  function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
   var vertSquashRatio = detectVerticalSquash(img);
   ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
  }
-function drawImage(imageObj) { /*this is the second canvas function area*/
-        var canvas = document.getElementById('myCanvas');
-        var context = canvas.getContext('2d');
-        context.font = '20pt Calibri';
-        context.fillStyle = "black";
-        context.fillText("Blue only", 10, 20);
-        var imageX = 69;
-        var imageY = 50;
-        var imageWidth = imageObj.width;
-        var imageHeight = imageObj.height;
-        context.drawImage(imageObj, imageX, imageY);
-        var imageData = context.getImageData(imageX, imageY, imageWidth, imageHeight);
-        var data = imageData.data;
-        // iterate over all pixels
-        for(var i = 0, n = data.length; i < n; i += 4) {
-          var red = data[i];
-          var green = data[i + 1];
-          var blue = data[i + 2];
-          var alpha = data[i + 3];
-        }
-        // pick out pixel data from x, y coordinate
-        var x = 20;
-        var y = 20;
-        var red = data[((imageWidth * y) + x) * 4];
-        var green = data[((imageWidth * y) + x) * 4 + 1];
-        var blue = data[((imageWidth * y) + x) * 4 + 2];
-        var alpha = data[((imageWidth * y) + x) * 4 + 3];
-        
-        // iterate over all pixels based on x and y coordinates
-        for(var y = 0; y < imageHeight; y++) {
-          // loop through each column
-          for(var x = 0; x < imageWidth; x++) {
-            var red = data[((imageWidth * y) + x) * 4];
-            var green = data[((imageWidth * y) + x) * 4 + 1];
-            var blue = data[((imageWidth * y) + x) * 4 + 2];
-            var alpha = data[((imageWidth * y) + x) * 4 + 3];
-          }
-        }
-      }
-      var imageObj = new Image();
-      imageObj.onload = function() {
-        drawImage(this);
-      };
-      imageObj.src = 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'; /*this loads a place holding darth vader picture*/
+
 /* window.onload necessary to keep javascripts from running before the app gets a chance to load entirely. */
  window.onload = function() {
   var fileInput = document.getElementById('fileInput');
@@ -134,8 +96,10 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
           /*This finally draws the image onto the first drawing canvas. The specific canvas is referred to by "context". This is established down in the HTML part of the file just under the first <canvas> tag. If we weren't worried about fixing an iPhone bug we would use context.drawImage(image, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500) instead of drawImageIOSFix */
         
           drawImageIOSFix(context,img, 0, 0, img.naturalWidth, img.naturalHeight, 0, 0, 600, 500);
+
           /*  +++++++++++++++ BEGIN IMAGE PROCESSING +++++++++++++++ */
           /*  ++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
           /* PUT ANY CHANGES TO THE JAVASCRIPT HERE  */
           
           
@@ -157,6 +121,7 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
  } // end of the window.onload function
  </script>
  </head>
+
  <body>
   <div data-role="page">
     <div data-role="header">
@@ -169,33 +134,23 @@ function drawImage(imageObj) { /*this is the second canvas function area*/
       </div>
       <div id="messageDisplayArea"></div>
       
-      <canvas id="a" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas> <!-- this is the second canvas-->
-      
       <canvas id="myCanvas" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
-      
-      
-      <script> /* This script here initiates the cavas and puts the text on the canvas "Original..." */
-      
-        var canvas = document.getElementById('a');
+      <script> /* This script initiates the cavas and puts the text on the canvas "myCanvas" */
+        var canvas = document.getElementById('myCanvas');
         var context = canvas.getContext("2d");
         context.font = '20pt Calibri';
         context.fillStyle = "black";
-        context.fillText("Original image will go here", 10, 20); 
+        context.fillText("Original image will go here", 10, 20);
       </script>
-
-        <script>
-
-    </script>
-  <script>"use strict";var wprRemoveCPCSS=function wprRemoveCPCSS(){var elem;document.querySelector('link[data-rocket-async="style"][rel="preload"]')?setTimeout(wprRemoveCPCSS,200):(elem=document.getElementById("rocket-critical-css"))&&"remove"in elem&&elem.remove()};window.addEventListener?window.addEventListener("load",wprRemoveCPCSS):window.attachEvent&&window.attachEvent("onload",wprRemoveCPCSS);</script><script type="text/javascript">
-  window._taboola = window._taboola || [];
-  _taboola.pus
-            </script>
-<script>  /*this allows for useage of the debug console*/ 
-a = 5;
-b = 6;
-c = a + b;
-console.log(c);
-</script>
+     
+     <canvas id="myCanvas2" width=600 height=500 style="border:1px solid #d3d3d3;"></canvas>
+      <script> /* This script initiates makes a second canvas for the blue only image" */
+        var canvas2 = document.getElementById('myCanvas2');
+        var context2 = canvas2.getContext("2d");
+        context2.font = '20pt Calibri';
+        context2.fillStyle = "black";
+        context2.fillText("Blue only", 10, 20);
+      </script>
 
     </div><!-- /content -->
     <div data-role="footer" data-position="fixed">
